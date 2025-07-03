@@ -1,77 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5C7LYRYD5Y"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-5C7LYRYD5Y');
-  </script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Freshpaint Test App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Freshpaint Tracking Demo</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
       margin: 0;
       padding: 0;
-      height: 100vh;
+      font-family: 'Inter', sans-serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      min-height: 100vh;
+      color: #111827;
       text-align: center;
+      background: linear-gradient(270deg, #e0f2fe, #d1fae5, #fce7f3, #e0f2fe);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    img {
+      width: 80px;
+      margin-bottom: 20px;
+      animation: fadeIn 1.5s ease forwards;
     }
 
     h1 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #1f2937;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 1s ease;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1.8s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .subtext {
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 0.4s;
+      font-size: 1rem;
+      color: #4b5563;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
 
     button {
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: #2563eb;
       color: white;
       border: none;
+      padding: 12px 24px;
       border-radius: 8px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.2s ease;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      min-width: 180px;
     }
 
     button:hover {
       background-color: #1e40af;
-      transform: translateY(-2px);
+      transform: translateY(-1px);
+    }
+
+    button i {
+      margin-right: 8px;
     }
 
     footer {
-      margin-top: 2.5rem;
+      margin-top: 40px;
       font-size: 0.9rem;
       color: #6b7280;
-      animation: fadeIn 1.5s ease;
+      opacity: 0.8;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
+    @media (max-width: 480px) {
       h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
 
       button {
@@ -81,30 +116,73 @@
   </style>
 </head>
 <body>
-
-  <!-- Logo -->
-  <img src="freshpaint-logo.png" alt="Freshpaint Logo" style="width: 80px; margin-bottom: 20px;" />
+  <img src="freshpaint-logo.png" alt="Freshpaint Logo" />
 
   <h1>Freshpaint Tracking Demo</h1>
-  
-  <p style="color:#4b5563; font-size: 1rem; margin-bottom: 2rem;">
-  This demo tracks custom and purchase events using Freshpaint and GA4 Proxy.
-  </p>
-  
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
-  <button onclick="freshpaint.track('Button Clicked')">Track</button>
-  <button onclick="freshpaint.track('purchase', { value: 199.99, currency: 'USD' })">Purchase</button>
-</div>
+  <p class="subtext">Simulate custom & purchase events powered by Freshpaint + GA4 Proxy.</p>
+
+  <div class="button-group">
+    <button onclick="freshpaint.track('Button Clicked')">
+      <i class="fas fa-mouse-pointer"></i> Track
+    </button>
+    <button onclick="freshpaint.track('purchase', { value: 199.99, currency: 'USD' })">
+      <i class="fas fa-shopping-cart"></i> Purchase
+    </button>
+  </div>
+
   <footer>
     Built by Jeffrey Adjei
   </footer>
 
   <!-- Freshpaint SDK -->
   <script type="text/javascript">
-    (function(c,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,f=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null};f&&d(f,"fpState")&&(j=JSON.parse(decodeURIComponent(d(f,"fpState"))),"fpeditor"===j.action&&(b.sessionStorage.setItem("_fpcehash",f),history.replaceState(j.desiredHash||"",c.title,k.pathname+k.search)))}catch(n){}var l,h;window.freshpaint=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,0)))}}var e=a;"undefined"!==typeof g?e=a[g]=[]:g="freshpaint";e.people=e.people||[];e.toString=function(b){var a="freshpaint";"freshpaint"!==g&&(a+="."+g);b||(a+=" (stub)");return a};e.people.toString=function(){return e.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove people group page alias ready addEventProperties addInitialEventProperties removeEventProperty addPageviewProperties registerCallConversion".split(" ");
-    for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])}}for(var b={},d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b};a._i.push([b,d,g])};a.__SV=1.4;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof FRESHPAINT_CUSTOM_LIB_URL?
-    FRESHPAINT_CUSTOM_LIB_URL:"//perfalytics.com/static/js/freshpaint.js";(d=c.getElementsByTagName("script")[0])?d.parentNode.insertBefore(b,d):c.head.appendChild(b)}})(document,window.freshpaint||[]);
-    freshpaint.init("78083b92-35b7-4fb1-8e0b-c5c84f4c873f");
+    (function(c,a){
+      if(!a.__SV){
+        var b=window;
+        try {
+          var d,m,j,k=b.location,f=k.hash;
+          d=function(a,b){
+            return (m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null;
+          };
+          f && d(f,"state") && ("null"!==d(f,"state") && (window.history.replaceState({},document.title,k.pathname+k.search)));
+        } catch(e){}
+        var h,l;
+        window.freshpaint = a;
+        a._i = [];
+        a.init = function(b,d,g){
+          function c(b,a){
+            var c=a.split(".");
+            2==c.length && (b=b[c[0]],a=c[1]);
+            b[a] = function(){
+              b.push([a].concat(Array.prototype.slice.call(arguments,0)));
+            }
+          }
+          var e=a;
+          "undefined"!==typeof g?e=a[g]=[]:g="freshpaint";
+          e.people = e.people || [];
+          e.toString = function(b){
+            var a="freshpaint";
+            "freshpaint"!==g && (a+="."+g);
+            b || (a+=" (stub)");
+            return a;
+          };
+          e.people.toString = function(){
+            return e.toString(1)+".people (stub)";
+          };
+          var f="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+          for(h=0;h<f.length;h++)c(e,f[h]);
+          a._i.push([b,d,g]);
+        };
+        a.__SV = 1.0;
+        var e=c.createElement("script");
+        e.type="text/javascript";
+        e.async=!0;
+        e.src="//perfalytics.com/static/js/freshpaint.js";
+        var g=c.getElementsByTagName("script")[0];
+        g.parentNode.insertBefore(e,g);
+      }
+    })(document,window.freshpaint||[]);
+    freshpaint.init("78883b92-35b7-4fb1-8e0b-c5c84f4c873f");
     freshpaint.page();
   </script>
 </body>
