@@ -85,14 +85,18 @@
   <!-- Logo -->
   <img src="freshpaint-logo.png" alt="Freshpaint Logo" style="width: 80px; margin-bottom: 20px;" />
 
-  <h1>Welcome to My Freshpaint Test App</h1>
+  <h1>Freshpaint Tracking Demo</h1>
+  
+  <p style="color:#4b5563; font-size: 1rem; margin-bottom: 2rem;">
+  This demo tracks custom and purchase events using Freshpaint and GA4 Proxy.
+  </p>
   
   <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
   <button onclick="freshpaint.track('Button Clicked')">Track</button>
   <button onclick="freshpaint.track('purchase', { value: 199.99, currency: 'USD' })">Purchase</button>
 </div>
   <footer>
-    Built by Jeffrey Adjei for the Freshpaint Assessment
+    Built by Jeffrey Adjei
   </footer>
 
   <!-- Freshpaint SDK -->
